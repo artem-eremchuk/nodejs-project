@@ -1,59 +1,61 @@
 {
-	"people": [{
-			"id": 1,
-			"name": "Mike",
-			"age": 25,
-			"country": "Australia",
-			"gender": "male"
-		},
-		{
-			"id": 2,
-			"name": "Kate",
-			"age": 22,
-			"country": "USA",
-			"gender": "female"
-		},
-		{
-			"id": 3,
-			"name": "John",
-			"age": 21,
-			"country": "UK",
-			"gender": "male"
-		},
-		{
-			"id": 4,
-			"name": "Liza",
-			"age": 23,
-			"country": "female",
-			"gender": "female"
-		},
-		{
-			"id": 5,
-			"name": "Ivan",
-			"age": 24,
-			"country": "Russia",
-			"gender": "male"
-		}
-	],
-	"messages": [{
-			"id": 1,
-			"text": "Hello"
-		},
-		{
-			"id": 2,
-			"text": "Hi"
-		},
-		{
-			"id": 3,
-			"text": "How are you?"
-		},
-		{
-			"id": 4,
-			"text": "Fine! And you?"
-		},
-		{
-			"id": 5,
-			"text": "I,m ok!"
-		}
-	]
+    "people": [
+        {
+            "id": 1,
+            "name": "Freddy",
+            "age": 45,
+            "country": "USA",
+            "gender": "male"
+        },
+        {
+            "id": 3,
+            "name": "John",
+            "age": 21,
+            "country": "UK",
+            "gender": "male"
+        },
+        {
+            "id": 4,
+            "name": "Liza",
+            "age": 23,
+            "country": "female",
+            "gender": "male"
+        },
+        {
+            "id": 5,
+            "name": "Ivan",
+            "age": 24,
+            "country": "Russia",
+            "gender": "male"
+        },
+        {
+            "id": 6,
+            "name": "Peter",
+            "age": 33,
+            "country": "Russia",
+            "gender": "male"
+        }
+    ],
+    "messages": [
+        {
+            "id": 1,
+            "text": "Hello"
+        },
+        {
+            "id": 2,
+            "text": "Hi"
+        },
+        {
+            "id": 3,
+            "text": "How your day?"
+        },
+        {
+            "id": 4,
+            "text": "Fine! And you?"
+        },
+        {
+            "id": 5,
+            "text": "I,m ok!"
+        }
+    ]
 }

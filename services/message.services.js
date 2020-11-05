@@ -1,5 +1,5 @@
 const fs = require('fs');
-class MessageService{
+class MessageServices{
     getMessages(){
         return new Promise((res, rej) => {
             fs.readFile('data.json', 'utf8', (err, data) => {
@@ -19,6 +19,70 @@ class MessageService{
             });
         });
     }
+
+    addMessage(body){
+        return new Promise((res, rej) => {
+            fs.readFile('data.json', (err, data) => {
+                if (err) throw err;
+
+                let fileData = JSON.parse(data);
+                let messages = fileData.messages;
+                messages.push(body);
+
+                fs.writeFile("data.json", JSON.stringify(fileData, null, 4), (err) => {
+                    if (err) throw err;
+                });
+
+                res('Message Added');
+            });
+        });
+    }
+
+    editMessage(id, body){
+        return new Promise((res, rej) => {
+            fs.readFile('data.json', (err, data) => {
+                if (err) throw err;
+
+                let fileData = JSON.parse(data);
+                let messages = fileData.messages;
+                messages.find((item, index) => {
+                    if (id == item.id){
+                        messages[index] = body;
+                    }
+                });
+
+                fs.writeFile("data.json", JSON.stringify(fileData, null, 4), (err) => {
+                    if (err) throw err;
+                });
+
+                res('Message Edited');
+            });
+        });
+    }
+
+    deleteMessage(id){
+        return new Promise((res, rej) => {
+            fs.readFile('data.json', (err, data) => {
+                if (err) throw err;
+
+                let fileData = JSON.parse(data);
+                let messages = fileData.messages;
+                messages.forEach((item, index) => {
+                    if (id == item.id){
+                        messages.splice(index, 1);
+                    };
+                });
+
+                fs.writeFile("data.json", JSON.stringify(fileData, null, 4), (err) => {
+                    if (err) throw err;
+                });
+
+                res('Message Delete');
+            });
+        });
+    }
 }
 
-module.exports = new MessageService();
+
+
+module.exports = new MessageServices();

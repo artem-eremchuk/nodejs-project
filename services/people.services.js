@@ -1,5 +1,5 @@
 const fs = require('fs');
-class PeopleService{
+class PeopleServices{
     getPeople(){
         return new Promise((res, rej) => {
             fs.readFile('data.json', 'utf8', (err, data) => {
@@ -19,6 +19,68 @@ class PeopleService{
             });
         });
     }
+
+    addPerson(body){
+        return new Promise((res, rej) => {
+            fs.readFile('data.json', (err, data) => {
+                if (err) throw err;
+
+                let fileData = JSON.parse(data);
+                let people = fileData.people;
+                people.push(body);
+
+                fs.writeFile("data.json", JSON.stringify(fileData, null, 4), (err) => {
+                    if (err) throw err;
+                });
+
+                res('Person Added');
+            });
+        });
+    }
+
+    editPerson(id, body){
+        return new Promise((res, rej) => {
+            fs.readFile('data.json', (err, data) => {
+                if (err) throw err;
+
+                let fileData = JSON.parse(data);
+                let people = fileData.people;
+                people.find((item, index) => {
+                    if (id == item.id){
+                        people[index] = body;
+                    }
+                });
+
+                fs.writeFile("data.json", JSON.stringify(fileData, null, 4), (err) => {
+                    if (err) throw err;
+                });
+
+                res('Person Edited');
+            });
+        });
+    }
+
+    deletePerson(id){
+        return new Promise((res, rej) => {
+            fs.readFile('data.json', (err, data) => {
+                if (err) throw err;
+
+                let fileData = JSON.parse(data);
+                let people = fileData.people;
+                people.forEach((item, index) => {
+                    if (id == item.id){
+                        people.splice(index, 1);
+                    };
+                });
+
+                fs.writeFile("data.json", JSON.stringify(fileData, null, 4), (err) => {
+                    if (err) throw err;
+                });
+
+                res('Person Delete');
+            });
+        });
+    }
 }
 
-module.exports = new PeopleService();
+module.exports = new PeopleServices();
