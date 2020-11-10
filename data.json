@@ -2,9 +2,9 @@
     "people": [
         {
             "id": 1,
-            "name": "Freddy",
-            "age": 45,
-            "country": "USA",
+            "name": "Steve",
+            "age": 18,
+            "country": "Brazilia",
             "gender": "male"
         },
         {
@@ -18,15 +18,8 @@
             "id": 4,
             "name": "Liza",
             "age": 23,
-            "country": "female",
-            "gender": "male"
-        },
-        {
-            "id": 5,
-            "name": "Ivan",
-            "age": 24,
-            "country": "Russia",
-            "gender": "male"
+            "country": "Mexico",
+            "gender": "female"
         },
         {
             "id": 6,
