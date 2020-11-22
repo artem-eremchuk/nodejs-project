@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const PeopleControllers = require('../controllers/people.controllers');
+const authenticatToken = require('../middleware/auth');
 
 /**
  * @swagger
@@ -14,7 +15,7 @@ const PeopleControllers = require('../controllers/people.controllers');
  *              description: Успешный ответ
  */ 
 
-router.get('/', async (req, res) => {
+router.get('/', authenticatToken, async (req, res) => {
     try{
         const people = await PeopleControllers.getPeople();
         res.send(people);
@@ -41,7 +42,7 @@ router.get('/', async (req, res) => {
  *              description: Успешный ответ
  */ 
 
-router.get('/personById/:id', async (req, res) => {
+router.get('/personById/:id', authenticatToken, async (req, res) => {
     try{
         const person = await PeopleControllers.getPersonById(req.params.id);
         res.send(person);
@@ -91,7 +92,7 @@ router.get('/personById/:id', async (req, res) => {
  *              type: string
  */ 
 
-router.post('/addPerson', async (req, res) => {
+router.post('/addPerson', authenticatToken, async (req, res) => {
     try {
         const answer = await PeopleControllers.addPerson(req.body);
         res.send(answer);
@@ -146,7 +147,7 @@ router.post('/addPerson', async (req, res) => {
  *              type: string
  */ 
 
-router.put('/editPerson/:id', async (req, res) => {
+router.put('/editPerson/:id', authenticatToken, async (req, res) => {
     try {
         const answer = await PeopleControllers.editPerson(req.params.id, req.body);
         res.send(answer);
@@ -175,7 +176,7 @@ router.put('/editPerson/:id', async (req, res) => {
  *              description: Успешный ответ
  */ 
 
-router.delete('/deletePerson/:id', async (req, res) => {
+router.delete('/deletePerson/:id', authenticatToken, async (req, res) => {
     try {
         const answer = await PeopleControllers.deletePerson(req.params.id);
         res.send(answer);

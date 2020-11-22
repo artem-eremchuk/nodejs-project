@@ -2,23 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const UsersControllers = require('../controllers/users.controllers');
-
-const authenticatToken = (req, res, next) => {
-    try {
-        const authHeader = req.headers.authorization;
-        const token = authHeader && authHeader.split(' ')[1];
-        if (token == null){
-            res.sendStatus(401);
-        }
-        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-            if (err) throw new Error('invalid token');
-            req.user = user;
-            next();
-        });
-    } catch (e) {
-        res.sendStatus(403);
-    }
-}
+const authenticatToken = require('../middleware/auth');
 
 /**
  * @swagger
@@ -41,6 +25,49 @@ router.get('/', authenticatToken, async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /users/register:
+ *  post:
+ *      summary: Регистрация пользователя
+ *      tags:
+ *        - Users
+ *      consumes:
+ *        - application/json
+ *      parameters:
+ *        - in: body
+ *          name: User
+ *          required: true
+ *          description: Добавить объект со свойствами
+ *          schema:
+ *              $ref: '#/definitions/UserRegister'
+ *      responses:
+ *          '200':
+ *              description: Успешный ответ
+ * definitions:
+ *  UserRegister:
+ *      type: object
+ *      required: 
+ *          - id
+ *          - firstname
+ *          - lastname
+ *          - email
+ *          - password
+ *      properties:
+ *          id: 
+ *              type: integer
+ *          text: 
+ *              type: string
+ *          firstname:
+ *              type: string
+ *          lastname:
+ *              type: string
+ *          email:
+ *              type: string
+ *          password:
+ *              type: string
+ */ 
+
 router.post('/register', async (req, res) => {
     try {
         const user = await UsersControllers.registerUser(req.body);
@@ -50,6 +77,38 @@ router.post('/register', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /users/login:
+ *  post:
+ *      summary: Проверка логина и пароля
+ *      tags:
+ *        - Users
+ *      consumes:
+ *        - application/json
+ *      parameters:
+ *        - in: body
+ *          name: User
+ *          required: true
+ *          description: Добавить объект со свойствами
+ *          schema:
+ *              $ref: '#/definitions/UserLogin'
+ *      responses:
+ *          '200':
+ *              description: Успешный ответ
+ * definitions:
+ *  UserLogin:
+ *      type: object
+ *      required: 
+ *          - email
+ *          - password
+ *      properties:
+ *          email:
+ *              type: string
+ *          password:
+ *              type: string
+ */ 
+
 router.post('/login', async (req, res) => {
     try {
         const token = await UsersControllers.loginUser(req.body);
@@ -57,7 +116,7 @@ router.post('/login', async (req, res) => {
     } catch (e) {
         console.log(e);
     }
-})
+});
 
 module.exports = router;
 

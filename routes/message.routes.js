@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const MessageControllers = require('../controllers/message.controllers');
+const authenticatToken = require('../middleware/auth');
 
 /**
  * @swagger
@@ -14,7 +15,7 @@ const MessageControllers = require('../controllers/message.controllers');
  *              description: Успешный ответ
  */ 
 
-router.get('/', async (req, res) => {
+router.get('/', authenticatToken, async (req, res) => {
     try {
         const messages = await MessageControllers.getMessages();
         res.send(messages);
@@ -41,7 +42,7 @@ router.get('/', async (req, res) => {
  *              description: Успешный ответ
  */ 
 
-router.get('/messageById/:id', async (req, res) => {
+router.get('/messageById/:id', authenticatToken, async (req, res) => {
     try{
         const message = await MessageControllers.getMessageById(req.params.id);
         res.send(message);
@@ -82,7 +83,7 @@ router.get('/messageById/:id', async (req, res) => {
  *              type: string
  */ 
 
-router.post('/addMessage', async (req, res) => {
+router.post('/addMessage', authenticatToken, async (req, res) => {
     try {
         const answer = await MessageControllers.addMessage(req.body);
         res.send(answer);
@@ -128,7 +129,7 @@ router.post('/addMessage', async (req, res) => {
  *              type: string
  */ 
 
-router.put('/editMessage/:id', async (req, res) => {
+router.put('/editMessage/:id', authenticatToken, async (req, res) => {
     try {
         const answer = await MessageControllers.editMessage(req.params.id, req.body);
         res.send(answer);
@@ -157,7 +158,7 @@ router.put('/editMessage/:id', async (req, res) => {
  *              description: Успешный ответ
  */ 
 
-router.delete('/deleteMessage/:id', async (req, res) => {
+router.delete('/deleteMessage/:id', authenticatToken, async (req, res) => {
     try {
         const answer = await MessageControllers.deleteMessage(req.params.id);
         res.send(answer);

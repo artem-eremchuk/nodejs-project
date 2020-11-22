@@ -2,6 +2,7 @@ const UsersServices = require('../services/users.services');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const saltRound = 10;
 class UsersControllers{
     async getUsers(){
         let users = await UsersServices.getUsers();
@@ -15,9 +16,8 @@ class UsersControllers{
             return e.email === email; // return email or underfind
         });
 
-        if (emailSearchResult === undefined){
+        if (!emailSearchResult){
             // hash, addUser and return user
-            const saltRound = 10;
             const hashedPassword = await bcrypt.hash(password, saltRound);
             const user = await UsersServices.addUser({
                 id: ++users.length,

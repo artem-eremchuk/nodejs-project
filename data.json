@@ -107,6 +107,13 @@
             "lastName": "Carry",
             "email": "carry@gmail.com",
             "password": "$2b$10$w4fyOUkhQC22pAdF8ppAbe/maWjpuXQ/BetqLZ36QPjp4k.o4K4oW"
+        },
+        {
+            "id": 9,
+            "firstName": "Donald",
+            "lastName": "Trump",
+            "email": "usa@gmail.com",
+            "password": "$2b$10$6vkIHO7x6MuBMxCq9FXKGeeXUvsjIYXDldpRFJRF5RvTErFpp9Zuq"
         }
     ]
 }
